@@ -111,7 +111,7 @@ BOOST_PYTHON_MODULE(example) {
 int main(int argc, char **argv)
 {
     // This line makes our module available to the embedded Python intepreter.
-    PyImport_AppendInittab("example", &initexample); 
+    PyImport_AppendInittab("example", PyInit_example); 
 
     // Initialize the Python runtime.
     Py_Initialize();

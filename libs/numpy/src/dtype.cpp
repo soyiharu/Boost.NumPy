@@ -138,6 +138,120 @@ public:
 
 };
 
+template <>
+class array_scalar_converter<npy_int32> {
+public:
+
+	static PyTypeObject const * get_pytype() {
+		return (PyTypeObject *)PyArray_TypeObjectFromType(NPY_INT32);
+	}
+
+	static void * convertible(PyObject * obj) {
+		return obj->ob_type == get_pytype() ? obj : NULL;
+	}
+
+	static void convert(PyObject * obj, pyconv::rvalue_from_python_stage1_data* data) {
+		void * storage = reinterpret_cast<pyconv::rvalue_from_python_storage<npy_int>*>(data)->storage.bytes;
+		PyArray_ScalarAsCtype(obj, reinterpret_cast<npy_int*>(storage));
+		data->convertible = storage;
+	}
+
+	static void declare() {
+		pyconv::registry::push_back(
+			&convertible, &convert, python::type_id<npy_int>()
+#ifndef BOOST_PYTHON_NO_PY_SIGNATURES
+			, &get_pytype
+#endif
+			);
+	}
+
+};
+template <>
+class array_scalar_converter<npy_int> {
+public:
+
+	static PyTypeObject const * get_pytype() {
+		return (PyTypeObject *)PyArray_TypeObjectFromType(NPY_INT);
+	}
+
+	static void * convertible(PyObject * obj) {
+		return obj->ob_type == get_pytype() ? obj : NULL;
+	}
+
+	static void convert(PyObject * obj, pyconv::rvalue_from_python_stage1_data* data) {
+		void * storage = reinterpret_cast<pyconv::rvalue_from_python_storage<npy_int>*>(data)->storage.bytes;
+		PyArray_ScalarAsCtype(obj, reinterpret_cast<npy_int*>(storage));
+		data->convertible = storage;
+	}
+
+	static void declare() {
+		pyconv::registry::push_back(
+			&convertible, &convert, python::type_id<npy_int>()
+#ifndef BOOST_PYTHON_NO_PY_SIGNATURES
+			, &get_pytype
+#endif
+			);
+	}
+
+};
+
+template <>
+class array_scalar_converter<npy_uint32> {
+public:
+
+	static PyTypeObject const * get_pytype() {
+		return (PyTypeObject *)PyArray_TypeObjectFromType(NPY_UINT32);
+	}
+
+	static void * convertible(PyObject * obj) {
+		return obj->ob_type == get_pytype() ? obj : NULL;
+	}
+
+	static void convert(PyObject * obj, pyconv::rvalue_from_python_stage1_data* data) {
+		void * storage = reinterpret_cast<pyconv::rvalue_from_python_storage<npy_uint>*>(data)->storage.bytes;
+		PyArray_ScalarAsCtype(obj, reinterpret_cast<npy_uint*>(storage));
+		data->convertible = storage;
+	}
+
+	static void declare() {
+		pyconv::registry::push_back(
+			&convertible, &convert, python::type_id<npy_uint>()
+#ifndef BOOST_PYTHON_NO_PY_SIGNATURES
+			, &get_pytype
+#endif
+			);
+	}
+
+};
+template <>
+class array_scalar_converter<npy_uint> {
+public:
+
+	static PyTypeObject const * get_pytype() {
+		return (PyTypeObject *)PyArray_TypeObjectFromType(NPY_UINT);
+	}
+
+	static void * convertible(PyObject * obj) {
+		return obj->ob_type == get_pytype() ? obj : NULL;
+	}
+
+	static void convert(PyObject * obj, pyconv::rvalue_from_python_stage1_data* data) {
+		void * storage = reinterpret_cast<pyconv::rvalue_from_python_storage<npy_uint>*>(data)->storage.bytes;
+		PyArray_ScalarAsCtype(obj, reinterpret_cast<npy_uint*>(storage));
+		data->convertible = storage;
+	}
+
+	static void declare() {
+		pyconv::registry::push_back(
+			&convertible, &convert, python::type_id<npy_uint>()
+#ifndef BOOST_PYTHON_NO_PY_SIGNATURES
+			, &get_pytype
+#endif
+			);
+	}
+
+};
+
 } // anonymous
 
 void dtype::register_scalar_converters() {
@@ -150,6 +264,8 @@ void dtype::register_scalar_converters() {
   array_scalar_converter<npy_int32>::declare();
   array_scalar_converter<npy_uint64>::declare();
   array_scalar_converter<npy_int64>::declare();
+  array_scalar_converter<npy_uint>::declare();
+  array_scalar_converter<npy_int>::declare();
   array_scalar_converter<float>::declare();
   array_scalar_converter<double>::declare();
   array_scalar_converter< std::complex<float> >::declare();
