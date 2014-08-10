@@ -24,18 +24,18 @@ struct ArrayFiller
     if (N == 1) 
     {
       char * p = argument.get_data();
-      int stride = argument.strides(0);
-      int size = argument.shape(0);
+      int stride = static_cast<int>(argument.strides(0));
+      int size = static_cast<int>(argument.shape(0));
       for (int n = 0; n != size; ++n, p += stride) 
 	*reinterpret_cast<T*>(p) = static_cast<T>(n);
     }
     else
     {
       char * row_p = argument.get_data();
-      int row_stride = argument.strides(0);
-      int col_stride = argument.strides(1);
-      int rows = argument.shape(0);
-      int cols = argument.shape(1);
+      int row_stride = static_cast<int>(argument.strides(0));
+      int col_stride = static_cast<int>(argument.strides(1));
+	  int rows = static_cast<int>(argument.shape(0));
+	  int cols = static_cast<int>(argument.shape(1));
       int i = 0;
       for (int n = 0; n != rows; ++n, row_p += row_stride) 
       {

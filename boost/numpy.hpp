@@ -10,6 +10,14 @@
  *  @brief Main public header file for boost.numpy.
  */
 
+#ifndef NPY_NO_DEPRECATED_API
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+#endif
+
+#ifndef HAVE_ROUND
+#define HAVE_ROUND
+#endif
+
 #include <boost/numpy/dtype.hpp>
 #include <boost/numpy/ndarray.hpp>
 #include <boost/numpy/scalars.hpp>

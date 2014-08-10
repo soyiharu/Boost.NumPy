@@ -58,8 +58,8 @@ void wrap_fill1(np::ndarray const & array) {
         p::throw_error_already_set();
     }
     fill1(reinterpret_cast<double*>(array.get_data()),
-          array.shape(0), array.shape(1),
-          array.strides(0) / sizeof(double), array.strides(1) / sizeof(double));
+          static_cast<int>(array.shape(0)), static_cast<int>(array.shape(1)),
+          static_cast<int>(array.strides(0)) / sizeof(double), static_cast<int>(array.strides(1)) / sizeof(double));
 }
 
 // Another fill function that takes a double**.  This is less efficient, because
@@ -93,13 +93,13 @@ void wrap_fill2(np::ndarray const & array) {
         p::throw_error_already_set();
     }
     double * iter = reinterpret_cast<double*>(array.get_data());
-    int rows = array.shape(0);
-    int cols = array.shape(1);
+	int rows = static_cast<int>(array.shape(0));
+	int cols = static_cast<int>(array.shape(1));
     boost::scoped_array<double*> ptrs(new double*[rows]);
     for (int i = 0; i < rows; ++i, iter += cols) {
         ptrs[i] = iter;
     }
-    fill2(ptrs.get(), array.shape(0), array.shape(1));
+    fill2(ptrs.get(), static_cast<int>(array.shape(0)), static_cast<int>(array.shape(1)));
 }
 
 BOOST_PYTHON_MODULE(example) {
@@ -123,8 +123,8 @@ int main(int argc, char **argv)
         "z2 = numpy.zeros((4,3), dtype=float)\n"
         "example.fill1(z1)\n"
         "example.fill2(z2)\n"
-        "print z1\n"
-        "print z2\n"
+		"print(z1)\n"
+		"print(z2)\n"
     );
     Py_Finalize();
 }

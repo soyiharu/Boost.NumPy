@@ -19,6 +19,7 @@ static void wrap_import_array() {
 #else
 static void * wrap_import_array() {
     import_array();
+	return (void*)-1;
 }
 #endif
 

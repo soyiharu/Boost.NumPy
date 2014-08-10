@@ -11,6 +11,13 @@
  *
  *  This should only be included by source files in the boost.numpy library itself.
  */
+#ifndef NPY_NO_DEPRECATED_API
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+#endif
+
+#ifndef HAVE_ROUND
+#define HAVE_ROUND
+#endif
 
 #include <boost/python.hpp>
 #ifdef BOOST_NUMPY_INTERNAL

@@ -260,7 +260,7 @@ struct mv2_from_python {
             if (array->shape(0) != 2) return 0;
             if (N == 2 && array->shape(1) != 2) return 0;
             return array.release();
-        } catch (bp::error_already_set & err) {
+        } catch (bp::error_already_set & /*err*/) {
             bp::handle_exception();
             return 0;
         }

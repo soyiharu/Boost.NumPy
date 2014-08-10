@@ -17,11 +17,11 @@ np::ndarray c_empty(p::tuple shape, np::dtype dt)
 {
   // convert 'shape' to a C array so we can test the corresponding
   // version of the constructor
-  unsigned len = p::len(shape);
+  ssize_t len = p::len(shape);
   Py_intptr_t *c_shape = new Py_intptr_t[len];
-  for (unsigned i = 0; i != len; ++i)
+  for (ssize_t i = 0; i != len; ++i)
     c_shape[i] = p::extract<Py_intptr_t>(shape[i]);
-  np::ndarray result = np::empty(len, c_shape, dt);
+  np::ndarray result = np::empty(static_cast<int>(len), c_shape, dt);
   delete [] c_shape;
   return result;
 }
