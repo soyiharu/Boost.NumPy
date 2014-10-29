@@ -12,7 +12,7 @@ import numpy
 class TestNdarray(unittest.TestCase):
     
     def testNdzeros(self):    
-        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128):
+        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128, int, float):
             v = numpy.zeros(60, dtype=dtp)
             dt = numpy.dtype(dtp)
             for shape in ((60,),(6,10),(4,3,5),(2,2,3,5)):
@@ -22,7 +22,7 @@ class TestNdarray(unittest.TestCase):
                 self.assertTrue((a1 == a2).all())
 
     def testNdzeros_matrix(self):    
-        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128):
+        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128, int, float):
             dt = numpy.dtype(dtp)
             shape = (6, 10)
             a1 = ndarray_mod.zeros_matrix(shape, dt)
@@ -33,7 +33,7 @@ class TestNdarray(unittest.TestCase):
 
     def testNdarray(self):    
         a = range(0,60)
-        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128):
+        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128, int, float):
             v = numpy.array(a, dtype=dtp)
             dt = numpy.dtype(dtp)
             a1 = ndarray_mod.array(a)
@@ -47,7 +47,7 @@ class TestNdarray(unittest.TestCase):
                 self.assertEqual(shape,a2.shape)
 
     def testNdempty(self):
-        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128):
+        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128, int, float):
             dt = numpy.dtype(dtp)
             for shape in ((60,),(6,10),(4,3,5),(2,2,3,5)):
                 a1 = ndarray_mod.empty(shape,dt)
@@ -56,7 +56,7 @@ class TestNdarray(unittest.TestCase):
                 self.assertEqual(shape,a2.shape)
 
     def testTranspose(self):
-        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128):
+        for dtp in (numpy.int16, numpy.int32, numpy.float32, numpy.complex128, int, float):
             dt = numpy.dtype(dtp)
             for shape in ((6,10),(4,3,5),(2,2,3,5)):
                 a1 = numpy.empty(shape,dt)

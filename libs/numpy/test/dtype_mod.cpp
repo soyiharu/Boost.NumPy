@@ -36,6 +36,10 @@ BOOST_PYTHON_MODULE(dtype_mod)
   p::def("accept_ushort", accept<unsigned short>);
   p::def("accept_intc", accept<int>);
   p::def("accept_uintc", accept<unsigned int>);
+  p::def("accept_long", accept<long>);
+  //p::def("accept_ulong", accept<unsigned long>);	// numpy has no attribute 'ulong'
+  p::def("accept_longlong", accept<long long>);
+  p::def("accept_ulonglong", accept<unsigned long long>);
   // floats and complex
   p::def("accept_float32", accept<float>);
   p::def("accept_complex64", accept< std::complex<float> >);

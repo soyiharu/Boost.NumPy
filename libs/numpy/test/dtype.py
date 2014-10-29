@@ -31,7 +31,8 @@ class DtypeTestCase(unittest.TestCase):
             if sys.version_info.major < 3:
                 self.assertEquivalent(fs(long(1)), numpy.dtype(s))
                 self.assertEquivalent(fu(long(1)), numpy.dtype(u))
-        for name in ("bool_", "byte", "ubyte", "short", "ushort", "intc", "uintc"):
+        for name in ("bool_", "byte", "ubyte", "short", "ushort", "intc", "uintc", 
+                     "long", "longlong", "ulonglong"):  # numpy has no attribute "ulong"
             t = getattr(numpy, name)
             ft = getattr(dtype_mod, "accept_%s" % name)
             self.assertEquivalent(ft(t(1)), numpy.dtype(t))
@@ -41,7 +42,6 @@ class DtypeTestCase(unittest.TestCase):
                 self.assertEquivalent(ft(int(1)), numpy.dtype(t))
                 if sys.version_info.major < 3:
                     self.assertEquivalent(ft(long(1)), numpy.dtype(t))
-
 
     def testFloats(self):
         f = numpy.float32
